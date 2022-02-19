@@ -1,0 +1,12 @@
+F:\Csharp\liscuter\obj\Debug\liscuter.csproj.SuggestedBindingRedirects.cache
+F:\Csharp\liscuter\obj\Debug\liscuter.csproj.CoreCompileInputs.cache
+F:\Csharp\liscuter\bin\Debug\liscuter.exe.config
+F:\Csharp\liscuter\bin\Debug\liscuter.exe
+F:\Csharp\liscuter\bin\Debug\liscuter.pdb
+F:\Csharp\liscuter\obj\Debug\liscuter.exe
+F:\Csharp\liscuter\obj\Debug\liscuter.pdb
+F:\Csharp\liscuter\bin\Debug\liscuter.exe.manifest
+F:\Csharp\liscuter\bin\Debug\liscuter.application
+F:\Csharp\liscuter\obj\Debug\liscuter.exe.manifest
+F:\Csharp\liscuter\obj\Debug\liscuter.application
+F:\Csharp\liscuter\obj\Debug\liscuter.csproj.AssemblyReference.cache
