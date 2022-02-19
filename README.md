@@ -1,5 +1,7 @@
-# Welcome to GitHub Desktop!
+# Liscuter使用手册
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+## 文本追加
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+目前功能有bug，预计在1.0正式版本修复。
+
+## 你是一个英语老师
