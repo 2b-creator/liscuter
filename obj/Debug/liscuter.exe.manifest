@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="liscuter.exe" size="26592">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="liscuter.exe" size="27616">
       <assemblyIdentity name="liscuter" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ottGqmFW9Jk5WlM53Sn2+GP5VdYbfh4E70WvQ6PYpaM=</dsig:DigestValue>
+        <dsig:DigestValue>R5WokA3HFmjkfXqBtNnPh2hrgrTlTOhwXMzu2UKCGmY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

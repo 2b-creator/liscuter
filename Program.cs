@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace liscuter
 {
     internal class Program
     {
+        private static string file;
+
         static void Main(string[] args)
         {
             string isFirstStart = ConfigurationManager.AppSettings["IsFirstStart"];
@@ -61,7 +65,7 @@ namespace liscuter
                         return;
                     }
                 }
-                if (System.IO.File.Exists("source2.mp3"))
+                if (System.IO.File.Exists("temp.mp3"))
                 {
                     // Use a try block to catch IOExceptions, to
                     // handle the case of the file already being
@@ -69,7 +73,7 @@ namespace liscuter
                     // source2.mp3
                     try
                     {
-                        System.IO.File.Delete("source2.mp3");
+                        System.IO.File.Delete("temp.mp3");
                     }
                     catch (System.IO.IOException e)
                     {
@@ -77,16 +81,57 @@ namespace liscuter
                         return;
                     }
                 }
-                Console.WriteLine("请将音频文件放置根目录下，然后请将其重命名为\"source.mp3\"");
-                StreamWriterTwo streamWriterTwo = new StreamWriterTwo();
-                string tcode = Transcoding.ToMP3("source");
+                Thread t = new Thread((ThreadStart)(() =>
+                {
+                    // 傻逼微软
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Multiselect = true;//该值确定是否可以选择多个文件
+                    dialog.Title = "请选择文件夹";
+                    dialog.Filter = "所有文件(*.*)|*.*";
+                    //if (dialog.ShowDialog() == DialogResult.OK)
+                    //{
+                    //    file = dialog.FileName;
+                    //}
+                    while (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    {
+                        dialog.Multiselect = true;//该值确定是否可以选择多个文件
+                        dialog.Title = "请选择文件夹";
+                        dialog.Filter = "所有文件(*.*)|*.*";
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            file = dialog.FileName;
+                            break;
+                        }
+                        //string file = dialog.FileName;
+                    }
+                    file = dialog.FileName;
+
+                }
+));
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
+                t.Join();
+
+
+                //OpenFileDialog dialog = new OpenFileDialog();
+                //dialog.Multiselect = true;//该值确定是否可以选择多个文件
+                //dialog.Title = "请选择文件夹";
+                //dialog.Filter = "所有文件(*.*)|*.*";
+                //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                //{
+                //    string file = dialog.FileName;
+                //}
+
+                //Console.WriteLine("请将音频文件放置根目录下，然后请将其重命名为\"source.mp3\"");
+                //StreamWriterTwo streamWriterTwo = new StreamWriterTwo();
+                string tcode = Transcoding.ToMP3(file);
                 Console.WriteLine("请输入开始时间，单位：分:秒");
                 string start = Console.ReadLine();
                 Console.WriteLine("请输入结束时间，单位：分:秒");
                 string end = Console.ReadLine();
                 Console.WriteLine("请输入题号");
                 string questionNumber = Console.ReadLine();
-                string cut = $"ffmpeg -i source2.mp3  -vn -acodec copy -ss {start} -to {end} {questionNumber}.mp3";
+                string cut = $"ffmpeg -i temp.mp3  -vn -acodec copy -ss {start} -to {end} {questionNumber}.mp3";
                 string general = tcode + cut;
                 //streamWriterTwo.ExampleAsync(general);
                 //String isAppend = ConfigurationManager.AppSettings["IsAppend"];
@@ -103,6 +148,7 @@ namespace liscuter
                 //StreamWriter file = new StreamWriter("run.bat", append: booltemp);
                 //await file.WriteLineAsync(general);
                 StreamWriter sw = new StreamWriter("run.bat", true, System.Text.Encoding.Default);
+                sw.WriteLine("@echo off");
                 sw.WriteLine(tcode);//写入bat文件
                 sw.WriteLine(cut);
                 Console.WriteLine("是(y)否(n)继续切题");
@@ -121,13 +167,20 @@ namespace liscuter
                     string Aend = Console.ReadLine();
                     Console.WriteLine("请输入题号");
                     string AquestionNumber = Console.ReadLine();
-                    string Acut = $"ffmpeg -i source2.mp3  -vn -acodec copy -ss {Astart} -to {Aend} {AquestionNumber}.mp3";
+                    string Acut = $"ffmpeg -i temp.mp3  -vn -acodec copy -ss {Astart} -to {Aend} {AquestionNumber}.mp3";
                     sw.WriteLine(Acut);
                     Console.WriteLine("是(y)否(n)继续切题");
                     isContinue = Console.ReadLine();
                 }
+                sw.WriteLine("Finish.vbs");
                 sw.Flush();
                 sw.Close();
+                ThreadStart childref = new ThreadStart(RunMutithreadings.CallToChildThread);
+                //Console.WriteLine("In Main: Creating the Child thread");
+                Thread childThread = new Thread(childref);
+                childThread.Start();
+                //Console.ReadKey();
+                
             }
         }
     }
