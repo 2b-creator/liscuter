@@ -10,7 +10,7 @@ namespace liscuter
     {
         public static string ToMP3(string file)
         {
-            string tomp3code = $"ffmpeg -i {file} temp.mp3";
+            string tomp3code = $"ffmpeg -i {file}.mp3 temp.mp3";
             return tomp3code;
         }
     }

@@ -124,7 +124,17 @@ namespace liscuter
 
                 //Console.WriteLine("请将音频文件放置根目录下，然后请将其重命名为\"source.mp3\"");
                 //StreamWriterTwo streamWriterTwo = new StreamWriterTwo();
-                string tcode = Transcoding.ToMP3(file);
+
+
+                //文件重命名复制
+                string sourceFile = file;
+                string destinationFile = System.IO.Directory.GetCurrentDirectory();
+                destinationFile = System.IO.Path.Combine(destinationFile, "NoConvert.mp3");
+                bool isrewrite = true; // true=覆盖已存在的同名文件,false则反之 
+                System.IO.File.Copy(sourceFile, destinationFile, isrewrite);
+
+                string tcode = Transcoding.ToMP3("NoConvert");
+
                 Console.WriteLine("请输入开始时间，单位：分:秒");
                 string start = Console.ReadLine();
                 Console.WriteLine("请输入结束时间，单位：分:秒");
@@ -180,7 +190,7 @@ namespace liscuter
                 Thread childThread = new Thread(childref);
                 childThread.Start();
                 //Console.ReadKey();
-                
+
             }
         }
     }
