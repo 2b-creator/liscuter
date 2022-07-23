@@ -91,7 +91,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-该程序是免费软件：您可以根据自由软件基金会发布的 GNU 宽通用公共许可证的条款重新分发和/或修改它，许可证的第 3 版或（由您选择）任何更高版本。
+该程序是自由软件：您可以根据自由软件基金会发布的 GNU 宽通用公共许可证的条款重新分发和/或修改它，许可证的第 3 版或（由您选择）任何更高版本。
 
 分发此程序的目的是希望它有用，但不提供任何保证； 甚至没有对适销性或特定用途适用性的默示保证。 有关更多详细信息，请参阅 GNU 通用公共许可证。
 
